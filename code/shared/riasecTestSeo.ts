@@ -16,7 +16,7 @@ export const RIASEC_TEST_FAQS = [
   },
   {
     question: "Le test RIASEC est-il gratuit ?",
-    answer: "Oui, et sans créer de compte. Votre résultat s'affiche dès la dernière réponse : votre code à 3 lettres, vos scores sur les six types, des métiers et des environnements de travail qui vous correspondent.",
+    answer: "Oui. Votre code à 3 lettres et sa lecture s'affichent dès la dernière réponse. Un compte Rebond gratuit, créé avec LinkedIn ou votre e-mail, débloque vos scores détaillés et les métiers qui vous correspondent, et garde le résultat dans votre espace.",
   },
   {
     question: "À quoi sert mon code RIASEC dans ma recherche d'emploi ?",

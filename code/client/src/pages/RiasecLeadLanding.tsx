@@ -104,7 +104,7 @@ export default function RiasecLeadLanding({ onOpenLogin, onOpenRegister }: Props
         subtitle={<>
           Le test d'orientation de référence : votre code à 3 lettres et les postes où vous serez bien.
           <span className="rll-checks">
-            {["10 minutes", "48 questions", "Gratuit, sans compte"].map((fact) => <span key={fact}><Check size={16} aria-hidden="true" />{fact}</span>)}
+            {["10 minutes", "48 questions", "Gratuit"].map((fact) => <span key={fact}><Check size={16} aria-hidden="true" />{fact}</span>)}
           </span>
         </>}
       />

@@ -8,7 +8,7 @@ export const SALARY_ESTIMATE_DESCRIPTION =
 export const SALARY_ESTIMATE_FAQS = [
   {
     question: "L'estimation de salaire est-elle gratuite ?",
-    answer: "Oui, et sans créer de compte. Déposez votre CV ou collez l'adresse de votre profil LinkedIn : votre fourchette s'affiche en moins d'une minute.",
+    answer: "Oui. Déposez votre CV ou collez l'adresse de votre profil LinkedIn : votre estimation s'affiche en moins d'une minute. Un compte Rebond gratuit, créé avec LinkedIn ou votre e-mail, débloque vos chiffres et garde l'estimation dans votre espace.",
   },
   {
     question: "Comment la fourchette est-elle calculée ?",

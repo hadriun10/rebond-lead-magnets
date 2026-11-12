@@ -1,6 +1,6 @@
-From fc89ee7a57ce7fae5e34c7a720daf2849578b976 Mon Sep 17 00:00:00 2001
+From 265ce3828b918bfe40017265e40378b388292c74 Mon Sep 17 00:00:00 2001
 From: Hadrien Grosbois <209065296+hadriun10@users.noreply.github.com>
-Date: Thu, 12 Nov 2026 08:25:36 +0100
+Date: Thu, 12 Nov 2026 08:29:30 +0100
 Subject: [PATCH] =?UTF-8?q?Lead=20magnets=20=C2=AB=20estimation=20de=20sal?=
  =?UTF-8?q?aire=20=C2=BB=20et=20=C2=AB=20test=20RIASEC=20=C2=BB?=
 MIME-Version: 1.0
@@ -1188,7 +1188,7 @@ index 68f48bc5..8d011253 100644
    }, [scope, locationSearch]);
 diff --git a/client/src/pages/RiasecLeadLanding.tsx b/client/src/pages/RiasecLeadLanding.tsx
 new file mode 100644
-index 00000000..b6b829e0
+index 00000000..0347a455
 --- /dev/null
 +++ b/client/src/pages/RiasecLeadLanding.tsx
 @@ -0,0 +1,158 @@
@@ -1298,7 +1298,7 @@ index 00000000..b6b829e0
 +        subtitle={<>
 +          Le test d'orientation de référence : votre code à 3 lettres et les postes où vous serez bien.
 +          <span className="rll-checks">
-+            {["10 minutes", "48 questions", "Gratuit, sans compte"].map((fact) => <span key={fact}><Check size={16} aria-hidden="true" />{fact}</span>)}
++            {["10 minutes", "48 questions", "Gratuit"].map((fact) => <span key={fact}><Check size={16} aria-hidden="true" />{fact}</span>)}
 +          </span>
 +        </>}
 +      />
@@ -2001,7 +2001,7 @@ index 00000000..c5fec661
 +}
 diff --git a/client/src/pages/SalaryLeadAnalysis.tsx b/client/src/pages/SalaryLeadAnalysis.tsx
 new file mode 100644
-index 00000000..d7746787
+index 00000000..af2bba4a
 --- /dev/null
 +++ b/client/src/pages/SalaryLeadAnalysis.tsx
 @@ -0,0 +1,431 @@
@@ -2059,7 +2059,7 @@ index 00000000..d7746787
 +  return <span className="sla-avatar sla-avatar-initials" aria-hidden="true">{initials(name) || <UserRound size={18} />}</span>;
 +}
 +
-+const CHECKS = ["Gratuit", "Sans créer de compte", "CV non conservé"];
++const CHECKS = ["Gratuit", "CV non conservé"];
 +
 +const INPUTS = [
 +  { title: "Votre métier", text: "Celui que vous exercez vraiment, lu dans vos intitulés et vos missions." },
@@ -2413,7 +2413,7 @@ index 00000000..d7746787
 +        </section>
 +
 +        <section className="sla-section" aria-labelledby="sla-inputs-title">
-+          <h2 id="sla-inputs-title">Quatre choses fixent votre salaire, nous les lisons dans votre parcours</h2>
++          <h2 id="sla-inputs-title">Sur quels critères nous nous basons</h2>
 +          <div className="sla-inputs">
 +            {INPUTS.map((input) => <div key={input.title}><b>{input.title}</b><p>{input.text}</p></div>)}
 +          </div>
@@ -4157,7 +4157,7 @@ index 00000000..b7d102c7
 +}
 diff --git a/shared/riasecTestSeo.ts b/shared/riasecTestSeo.ts
 new file mode 100644
-index 00000000..711dea7a
+index 00000000..2aa1988a
 --- /dev/null
 +++ b/shared/riasecTestSeo.ts
 @@ -0,0 +1,50 @@
@@ -4179,7 +4179,7 @@ index 00000000..711dea7a
 +  },
 +  {
 +    question: "Le test RIASEC est-il gratuit ?",
-+    answer: "Oui, et sans créer de compte. Votre résultat s'affiche dès la dernière réponse : votre code à 3 lettres, vos scores sur les six types, des métiers et des environnements de travail qui vous correspondent.",
++    answer: "Oui. Votre code à 3 lettres et sa lecture s'affichent dès la dernière réponse. Un compte Rebond gratuit, créé avec LinkedIn ou votre e-mail, débloque vos scores détaillés et les métiers qui vous correspondent, et garde le résultat dans votre espace.",
 +  },
 +  {
 +    question: "À quoi sert mon code RIASEC dans ma recherche d'emploi ?",
@@ -4213,7 +4213,7 @@ index 00000000..711dea7a
 +};
 diff --git a/shared/salaryEstimateSeo.ts b/shared/salaryEstimateSeo.ts
 new file mode 100644
-index 00000000..fb60e32d
+index 00000000..70c4a808
 --- /dev/null
 +++ b/shared/salaryEstimateSeo.ts
 @@ -0,0 +1,54 @@
@@ -4227,7 +4227,7 @@ index 00000000..fb60e32d
 +export const SALARY_ESTIMATE_FAQS = [
 +  {
 +    question: "L'estimation de salaire est-elle gratuite ?",
-+    answer: "Oui, et sans créer de compte. Déposez votre CV ou collez l'adresse de votre profil LinkedIn : votre fourchette s'affiche en moins d'une minute.",
++    answer: "Oui. Déposez votre CV ou collez l'adresse de votre profil LinkedIn : votre estimation s'affiche en moins d'une minute. Un compte Rebond gratuit, créé avec LinkedIn ou votre e-mail, débloque vos chiffres et garde l'estimation dans votre espace.",
 +  },
 +  {
 +    question: "Comment la fourchette est-elle calculée ?",
@@ -5672,7 +5672,7 @@ index 00000000..4a5af47b
 +  });
 +});
 diff --git a/tests/serverPublicPages.test.ts b/tests/serverPublicPages.test.ts
-index 95c3a2c2..9204640c 100644
+index 95c3a2c2..cdb749ca 100644
 --- a/tests/serverPublicPages.test.ts
 +++ b/tests/serverPublicPages.test.ts
 @@ -21,7 +21,7 @@ describe("shared server public pages", () => {
@@ -5689,7 +5689,7 @@ index 95c3a2c2..9204640c 100644
      // from this registry. Initial HTML has dedicated CV/LinkedIn renderer tests.
      expect(digest(PUBLIC_PAGE_META.map(({ initialBody, ...meta }) => meta)))
 -      .toBe("2bd3f1fc0d4c3c4ebef78c9f93e6b9b90897062e2a34a8b17130ecc8929855cb");
-+      .toBe("ae0437bf249c819af6772ec553de9d9d4f55c06b26008df807e368a2b9c74015");
++      .toBe("c2e72b712ab5044106f234592ebe54f54e01e1b4718582fe3fc2790ea2349195");
      expect(digest(PUBLIC_SITEMAP_PAGES))
 -      .toBe("fe41849730250fdd9d03347d6544f2a5c0394a4fbc3d11e1d90d490e241b9f89");
 +      .toBe("c4c338fe01db24b959e2a28ee478e33ecd96b413040f799573dd72bfff743ebe");

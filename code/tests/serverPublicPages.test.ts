@@ -36,7 +36,7 @@ describe("shared server public pages", () => {
     // Baselines captured from the original runtime declarations, not generated
     // from this registry. Initial HTML has dedicated CV/LinkedIn renderer tests.
     expect(digest(PUBLIC_PAGE_META.map(({ initialBody, ...meta }) => meta)))
-      .toBe("ae0437bf249c819af6772ec553de9d9d4f55c06b26008df807e368a2b9c74015");
+      .toBe("c2e72b712ab5044106f234592ebe54f54e01e1b4718582fe3fc2790ea2349195");
     expect(digest(PUBLIC_SITEMAP_PAGES))
       .toBe("c4c338fe01db24b959e2a28ee478e33ecd96b413040f799573dd72bfff743ebe");
   });

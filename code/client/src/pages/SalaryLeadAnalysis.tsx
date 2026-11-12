@@ -52,7 +52,7 @@ function Avatar({ photo, name }: { photo: string | null; name: string }) {
   return <span className="sla-avatar sla-avatar-initials" aria-hidden="true">{initials(name) || <UserRound size={18} />}</span>;
 }
 
-const CHECKS = ["Gratuit", "Sans créer de compte", "CV non conservé"];
+const CHECKS = ["Gratuit", "CV non conservé"];
 
 const INPUTS = [
   { title: "Votre métier", text: "Celui que vous exercez vraiment, lu dans vos intitulés et vos missions." },
@@ -406,7 +406,7 @@ export default function SalaryLeadAnalysis({ onOpenLogin, onOpenRegister, isAuth
         </section>
 
         <section className="sla-section" aria-labelledby="sla-inputs-title">
-          <h2 id="sla-inputs-title">Quatre choses fixent votre salaire, nous les lisons dans votre parcours</h2>
+          <h2 id="sla-inputs-title">Sur quels critères nous nous basons</h2>
           <div className="sla-inputs">
             {INPUTS.map((input) => <div key={input.title}><b>{input.title}</b><p>{input.text}</p></div>)}
           </div>

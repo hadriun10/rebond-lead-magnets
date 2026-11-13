@@ -9,32 +9,42 @@ l'analyse LinkedIn : le visiteur obtient tout de suite un premier résultat, et 
 | Estimation de salaire | `/estimation-salaire` | Sa fourchette de salaire brut à partir de son CV ou de son profil LinkedIn, ce que chaque atout lui rapporte, une note par pilier et les leviers pour être mieux payé au prochain poste |
 | Test RIASEC | `/test-riasec` | Son code à 3 lettres après 48 questions, ses six scores, une fiche par type et des métiers qui lui ressemblent |
 
-Tout le code tient dans **un seul commit** construit sur `main` (commit `e46ea026`, 04/11/2026).
+Le dossier **`code/`** contient tout le code, fichier par fichier, dans sa version finale, rangé
+comme dans le dépôt Rebond (`code/client/...` → `client/...`). Version du **13/11/2026**, construite
+sur `main` au commit `e46ea026` (04/11/2026).
 
 ---
 
-## Installer en une commande
+## Intégrer dans Rebond (Agent Replit)
 
-Depuis la racine du dépôt Rebond, avec un arbre de travail propre :
+Rien à installer, aucun script : l'Agent Replit lit les fichiers de `code/` et les place dans le dépôt.
 
-```sh
-curl -fsSL https://raw.githubusercontent.com/hadriun10/rebond-lead-magnets/main/install.sh | bash
-```
+1. **Copier chaque fichier de `code/`** au même chemin dans Rebond. Les 28 fichiers ajoutés sont
+   propres à ces outils. Les 8 fichiers modifiés sont donnés **en entier** : comparer avec la
+   version du dépôt et ne reprendre que les lignes listées dans le tableau « Fichiers » plus bas,
+   pour ne rien écraser de ce qui a bougé sur `main` depuis le 04/11.
+2. **Supprimer `client/src/components/LeadUnlockOverlay.tsx`** s'il a été ajouté avec la livraison
+   du 12/11 : plus aucun fichier ne l'utilise.
+3. Lancer `npm run check`, puis les tests (plus bas).
 
-Le script :
-1. vérifie qu'il tourne bien dans le dépôt Rebond et que rien n'est en cours ;
-2. crée la branche `lead-magnets-salaire-riasec` ;
-3. applique le commit avec `git am -3`, qui fusionne à 3 voies si `main` a bougé entre-temps ;
-4. lance `npm run check`.
+À donner tel quel à l'Agent Replit :
 
-Il ne pousse rien et ne touche pas à la base. Pour appliquer directement sur la branche
-courante : `... | bash -s -- --branche-courante`.
+> Lis le dépôt https://github.com/hadriun10/rebond-lead-magnets. Intègre dans Rebond chaque fichier
+> du dossier `code/` au même chemin, en suivant le README : les fichiers ajoutés tels quels, les
+> fichiers modifiés en ne reprenant que les changements décrits. Supprime
+> `client/src/components/LeadUnlockOverlay.tsx` s'il existe. Lance ensuite `npm run check`.
 
-**Sans le script :** téléchargez `lead-magnets-salaire-riasec.patch`, puis `git am -3 lead-magnets-salaire-riasec.patch`.
-**Depuis l'Agent Replit :** donnez-lui l'URL brute du patch et demandez-lui de l'appliquer avec `git am -3`.
+### Changements du 13/11/2026 (par rapport à la livraison du 12/11)
 
-Le dossier `code/` contient les mêmes fichiers dans leur version finale, pour les lire sur GitHub.
-Le patch fait foi.
+Seul `client/src/pages/RiasecLeadResult.tsx` change, et `LeadUnlockOverlay.tsx` disparaît :
+- plus de carte « débloquer » qui suit le défilement : chaque section garde ses blocs visibles,
+  seuls les textes sont floutés, avec une pastille « N … cachés · Débloquer gratuitement »
+  (scores, conseils, moteurs, une par ligne de métiers, environnements). Déblocage LinkedIn seul ;
+- bloc vert après « Ce que dit votre code » : accroche, 3 points, bouton « Découvrir nos
+  masterclasses » vers `/fonctionnalites/masterclass`, vidéo de Valérie en boucle muette
+  (`/public-objects/cms/elarning-intro-2-1791564890485.mp4`, celle de « Mon programme ») avec la
+  bulle « Exemple de masterclass » ;
+- les liens qui quittent le résultat s'ouvrent dans un nouvel onglet.
 
 ---
 
@@ -93,13 +103,12 @@ texte de secours s'il ne répond pas.
 | | Sans compte | Après connexion |
 |---|---|---|
 | Salaire | tous les textes lisibles, **tous les chiffres floutés**, fourchette comprise | tout, plus le recalcul « Je l'ai » |
-| RIASEC | code, résumé, hexagone et lectures visibles ; noms des métiers, scores et mots-clés CV floutés | tout |
+| RIASEC | code, résumé et hexagone visibles ; dans chaque section, blocs visibles mais textes floutés (au-delà du premier élément), noms des métiers, scores et mots-clés CV floutés | tout |
 
 Le flou est appliqué **côté serveur** (`publicSalaryPreview`, aperçu RIASEC) : les chiffres
 masqués ne partent jamais au navigateur. Le déblocage passe par
 `/api/auth/linkedin?returnTo=…` ou par la création de compte e-mail, puis par
-`POST /api/{salary,riasec}-lead/:id/claim`, comme `linkedin-lead`. Encart commun :
-`client/src/components/LeadUnlockOverlay.tsx`.
+`POST /api/{salary,riasec}-lead/:id/claim`, comme `linkedin-lead`.
 
 ### « Voir les offres »
 
@@ -157,7 +166,7 @@ Même nommage que `cv_lead_*` et `linkedin_lead_*`.
 `riasec_lead_questions_started`, `riasec_lead_halfway`, `riasec_lead_completed`,
 `riasec_lead_failed`, `riasec_lead_result_viewed`, `riasec_lead_unlock_clicked`,
 `riasec_lead_unlocked`, `riasec_lead_account_created`, `riasec_lead_claim_failed`,
-`riasec_lead_job_clicked`.
+`riasec_lead_job_clicked`, `riasec_lead_masterclass_clicked`.
 
 Les propriétés ne contiennent jamais de montant exact ni de donnée personnelle : seulement des
 tranches (`range_band`), le code RIASEC, la méthode de déblocage, `with_city`, `new_account`.
@@ -166,12 +175,12 @@ tranches (`range_band`), le code RIASEC, la méthode de déblocage, `with_city`,
 
 ## Fichiers
 
-**29 fichiers ajoutés**, tous propres à ces deux outils :
+**28 fichiers ajoutés**, tous propres à ces deux outils :
 
 ```
 client/src/pages/      SalaryLeadAnalysis · SalaryLeadLoading · SalaryLeadResult
                        RiasecLeadLanding · RiasecLeadQuiz · RiasecLeadResult
-client/src/components/ LeadUnlockOverlay · LeadJobSearch · SalaryLeadInsights · SalaryLeadScale
+client/src/components/ LeadJobSearch · SalaryLeadInsights · SalaryLeadScale
                        RiasecHexagon · RiasecLeadIntro
 client/src/lib/        salaryLeadJourney · riasecLeadJourney
 server/routes/         salaryLeadRoutes · riasecLeadRoutes
